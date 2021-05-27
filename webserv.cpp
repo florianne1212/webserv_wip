@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
     int listen_sock;
     int new_sock;
     long valread;
-    char *hello = "hey from server";
+    char hello[] = "hey from server";
     
     if (( fd_server = socket(AF_INET, SOCK_STREAM, 0)) <0)
     {
