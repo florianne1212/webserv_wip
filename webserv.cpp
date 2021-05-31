@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main(int argc, char const *argv[])
 {
@@ -15,7 +16,7 @@ int main(int argc, char const *argv[])
     long valread;
     char hello[] = "hey from server";
     
-    if (( fd_server = socket(AF_INET, SOCK_STREAM, 0)) <0)
+    if (( fd_server = socket(AF_INET, SOCK_STREAM, 0)) == 0)
     {
         perror("cannot create socket");
         return(0);
@@ -29,16 +30,19 @@ int main(int argc, char const *argv[])
 
     len_addr = sizeof(address);
 
-    bind_sock = bind(fd_server, (struct sockaddr *) &address, len_addr);
-
-    if((listen_sock = listen(fd_server, 10)) < 0)
+    if (bind(fd_server, (struct sockaddr *)&address, sizeof(address))<0)
+    {
+        perror("In bind");
+        exit(1);
+    }
+    if (listen(fd_server, 10) < 0)
     {
         perror("In listen");
-        return(0);
+        exit(1);
     }
     while(1)
     {
-        printf("\n waiting for connection");
+        printf("\n waiting for connection\n");
         if((new_sock = accept(fd_server, (struct sockaddr *) &address, (socklen_t *)&len_addr)) < 0)
         {
             perror("In accept");
@@ -49,7 +53,7 @@ int main(int argc, char const *argv[])
         printf("%s\n", buffer);
         write(new_sock, hello, strlen(hello));
 
-        printf("\n message sent");
+        printf("\n message sent\n");
         close(new_sock);
     }
     
