@@ -1,15 +1,18 @@
-#ifndef HTTPMETHODS_HPP
-#define HTTPMETHODS_HPP
+#ifndef HttpMethods_HPP
+#define HttpMethods_HPP
 
-class httpMethods
+class HttpMethods
 {
 private:
     /* data */
 public:
-    httpMethods(/* args */);
-    httpMethods(httpMethods const & copy);
-    ~httpMethods();
-    httpMethods & operator=(httpMethods const & ope);
+    HttpMethods(/* args */);
+    HttpMethods(HttpMethods const & copy);
+    ~HttpMethods();
+    HttpMethods & operator=(HttpMethods const & ope);
+
+public:
+
 };
 
 // GET 

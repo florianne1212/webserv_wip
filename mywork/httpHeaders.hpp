@@ -1,15 +1,15 @@
-#ifndef HTTPHEADERS_HPP
-#define HTTPHEADERS_HPP
+#ifndef HttpHeaders_HPP
+#define HttpHeaders_HPP
 
-class httpHeaders
+class HttpHeaders
 {
 private:
     /* data */
 public:
-    httpHeaders(/* args */);
-    httpHeaders(httpHeaders const & copy);
-    ~httpHeaders();
-    httpHeaders& operator=(httpHeaders const & ope);
+    HttpHeaders(/* args */);
+    HttpHeaders(HttpHeaders const & copy);
+    ~HttpHeaders();
+    HttpHeaders& operator=(HttpHeaders const & ope);
 };
 
 //

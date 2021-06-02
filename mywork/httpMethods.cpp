@@ -1,19 +1,19 @@
-#include "httpMethods.hpp"
+#include "HttpMethods.hpp"
 
-httpMethods::httpMethods(/* args */)
+HttpMethods::HttpMethods(/* args */)
 {
 }
 
-httpMethods::httpMethods(httpMethods const & copy)
+HttpMethods::HttpMethods(HttpMethods const & copy)
 {
 
 }
 
-httpMethods::~httpMethods()
+HttpMethods::~HttpMethods()
 {
 }
 
-httpMethods& httpMethods::operator=(httpMethods const & ope)
+HttpMethods& HttpMethods::operator=(HttpMethods const & ope)
 {
     
 }

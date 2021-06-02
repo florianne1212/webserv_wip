@@ -1,18 +1,29 @@
 #ifndef REQUEST_HPP
 #define REQUEST_HPP
+
 #include <string>
+#include <map>
+#include <vector>
 
-class request
+class Request
 {
-private:
-    std::string methods;
-    std::string url;
+	private:
+		std::string _methods;
+		std::string url;
+		std::string version;
+		std::map<std::string, std::string> headers;
+		
 
-public:
-    request(/* args */);
-    request (request const & copy);
-    ~request();
-    request& operator=(request const & ope);
+	public:
+		Request();
+		Request (Request const & copy);
+		~Request();
+		Request& operator=(Request const & ope);
+
+		std::vector<std::string> createMethods();
+		std::string getMethods();
+
+		void setMethods(std::string str);
 };
 
 //methods

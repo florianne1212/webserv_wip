@@ -1,20 +1,20 @@
 
-#include "httpHeaders.hpp"
+#include "HttpHeaders.hpp"
 
-httpHeaders::httpHeaders(/* args */)
+HttpHeaders::HttpHeaders(/* args */)
 {
 }
 
-httpHeaders::httpHeaders(httpHeaders const & copy)
+HttpHeaders::HttpHeaders(HttpHeaders const & copy)
 {
 
 }
 
-httpHeaders::~httpHeaders()
+HttpHeaders::~HttpHeaders()
 {
 }
 
-httpHeaders& httpHeaders::operator=(httpHeaders const & ope)
+HttpHeaders& HttpHeaders::operator=(HttpHeaders const & ope)
 {
 
 }
