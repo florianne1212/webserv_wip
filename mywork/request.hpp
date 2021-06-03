@@ -9,8 +9,8 @@ class Request
 {
 	private:
 		std::string _methods;
-		std::string url;
-		std::string version;
+		std::string _url;
+		std::string _version;
 		std::map<std::string, std::string> headers;
 		
 
@@ -22,8 +22,12 @@ class Request
 
 		std::vector<std::string> createMethods();
 		std::string getMethods();
+		std::string getUrl();
+		std::string getVersion();
 
 		void setMethods(std::string str);
+		void setUrl(std::string str);
+		void setVersion(std::string str);
 };
 
 //methods
