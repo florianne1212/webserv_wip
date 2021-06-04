@@ -68,20 +68,50 @@ status_error[511]="Network Authentication Required";
 
 
 
-HttpStatus::HttpStatus(/* args */)
+HttpStatus::HttpStatus():
+_code(0),
+_message()
 {
+}
+
+HttpStatus::HttpStatus(int code, std::string message):
+_code(code),
+_message(message)
+{
+
 }
 
 HttpStatus::HttpStatus(HttpStatus const & copy)
 {
-
+	*this = copy;
 }
 
 HttpStatus::~HttpStatus()
 {
 }
 
-HttpStatus& HttpStatus::operator=(HttpStatus const & ope)
+HttpStatus& HttpStatus::operator=(const HttpStatus & ope)
 {
-    
+    if(this != ope)
+	{
+		_message = ope._message;
+		_code = ope._code;
+	}
+	return(*this)
+}
+
+std::string HttpStatus::find_message(int code)
+{
+	std::string message = status_error.find(code)->second;
+	return(message);
+}
+
+int HttpStatus::get_code()
+{
+	return(_code);
+}
+
+std::string HttpStatus::get_message()
+{
+	return(_message);
 }

@@ -14,7 +14,7 @@ public:
     ~GetMethod();
     GetMethod& operator=(GetMethod const & ope);
 
-    handleGet(Client client, Request reauest, Response reponse);
+    handleGet(Client client, Request request, Response reponse);
 };
 
 #endif

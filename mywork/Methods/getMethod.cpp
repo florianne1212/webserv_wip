@@ -18,7 +18,7 @@ GetMethod& GetMethod::operator=(GetMethod const & ope)
 
 }
 
-GetMethod::handleGet(Client client, Request reauest, Response reponse)
+GetMethod::handleGet(Client client, Request request, Response reponse)
 {
     
 }
