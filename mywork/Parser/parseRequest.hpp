@@ -31,6 +31,7 @@ class ParseRequest
 		};
 	private:
 		std::string _method;
+		std::string _path;
 		int _major;
 		int _minor;
 		State _state;
@@ -44,6 +45,7 @@ class ParseRequest
 		ParseRequest& operator=(ParseRequest const & ope);
 
 		void parse(char c);
+		void parse_path(char c);
 };
 
 //

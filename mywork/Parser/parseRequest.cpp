@@ -1,5 +1,5 @@
 
-#include "ParseRequest.hpp"
+#include "parseRequest.hpp"
 
 ParseRequest::ParseRequest(/* args */)
 {
@@ -60,7 +60,7 @@ void ParseRequest::parse(char c)
 		}
 		case(S_PATH):
 		{
-
+			
 		}
 		case(S_HTTP_START):
 		{
@@ -104,5 +104,33 @@ void ParseRequest::parse(char c)
 			_state = S_HTTP_MAJOR;
 			break;
 		}
+		case(S_HTTP_MAJOR):
+		{
+			if(!isdigit(c))
+				throw ("http version major mus be a number");
+			if(c != 1)
+				throw ("wrong version only HTTP/1.1 is supported");
+			_major = c - '0';
+			_state = S_HTTP_DOT;
+			break;
+		}
+		case(S_HTTP_DOT):
+		{
+			if(!isdigit(c != '.'))
+				throw ("wrong charachter must be : .");
+			_state = S_HTTP_MINOR;
+			break;
+		}
+		case(S_HTTP_MINOR):
+		{
+			if(!isdigit(c))
+				throw ("http version minor mus be a number");
+			if(c != 1)
+				throw ("wrong version only HTTP/1.1 is supported");
+			_minor = c - '0';
+			_state = S_HTTP_END_R;
+			break;
+		}
+		// case(S)
 	}
 }
