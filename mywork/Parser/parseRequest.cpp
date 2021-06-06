@@ -60,7 +60,10 @@ void ParseRequest::parse(char c)
 		}
 		case(S_PATH):
 		{
-			
+			if(c != ' ')
+				_method += c;
+			else
+				_state = S_HTTP_START;
 		}
 		case(S_HTTP_START):
 		{
@@ -130,6 +133,18 @@ void ParseRequest::parse(char c)
 			_minor = c - '0';
 			_state = S_HTTP_END_R;
 			break;
+		}
+		case(S_HTTP_END_R):
+		{
+
+		}
+		case(S_HTTP_END_N):
+		{
+
+		}
+		case(S_HEADER_FIELDS):
+		{
+			
 		}
 		// case(S)
 	}

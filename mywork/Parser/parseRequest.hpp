@@ -2,6 +2,7 @@
 #define PARSEREQUEST_HPP
 
 #include <string>
+#include "parseHeaderFields.hpp"
 
 class ParseRequest
 {
