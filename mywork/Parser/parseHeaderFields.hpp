@@ -36,6 +36,11 @@ class ParseHeaderFields
 		{
 			return(_state);
 		}
+
+		std::string get_field()
+		{
+			return(_field);
+		}
 };
 
 //

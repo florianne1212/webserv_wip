@@ -115,7 +115,7 @@ void ParseRequest::parse(char c)
 		{
 			if(!isdigit(c))
 				printf("%s\n", "http version major must be a number");
-			if(c != 1)
+			if(c != '1')
 				printf("%s\n", "wrong version only HTTP/1.1 is supported");
 			_major = c - '0';
 			_state = S_HTTP_DOT;
@@ -132,10 +132,10 @@ void ParseRequest::parse(char c)
 		{
 			if(!isdigit(c))
 				printf("%s\n", "http version minor must be a number");
-			if(c != 1)
+			if(c != '1')
 				printf("%s\n", "wrong version only HTTP/1.1 is supported");
 			_minor = c - '0';
-			_state = S_HTTP_END_R;
+			_state = S_HTTP_END_N;
 			break;
 		}
 

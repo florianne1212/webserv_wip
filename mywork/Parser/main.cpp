@@ -14,6 +14,7 @@ int			main(int ac, char **av)
 	char	*line;
     int i = 0;
     ParseRequest _parserequest;
+	ParseHeaderFields _parseheader;
 	Message _message;
 
 	line = NULL;
@@ -28,9 +29,11 @@ int			main(int ac, char **av)
 
             i++;
         }
-        std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
-		std::cout << _parserequest.get_path() << "-\nmajor = ";
-		std::cout << _parserequest.get_major();
+        // std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
+		// std::cout << _parserequest.get_path() << "-\nmajor = ";
+		// std::cout << _parserequest.get_major() << "-\nminor = ";
+		// std::cout << _parserequest.get_minor();
+		std::cout << _parseheader.get_field();
         free(line);
 	}
 	close(fd);

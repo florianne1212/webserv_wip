@@ -1,4 +1,6 @@
 #include "parseHeaderFields.hpp"
+#include <stdio.h>
+#include <iostream>
 
 ParseHeaderFields::ParseHeaderFields():
 _state(S_FIELD)
@@ -42,6 +44,7 @@ void ParseHeaderFields::parse(char c)
 		}
 		case(S_COLON):
 		{
+			std::cout << _field;
 			if(c == ' ')
 				_state = S_SPACES_BEFORE_VALUE;
 			
