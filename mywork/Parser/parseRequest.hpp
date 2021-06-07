@@ -3,6 +3,7 @@
 
 #include <string>
 #include "parseHeaderFields.hpp"
+#include "stdio.h"
 
 class ParseRequest
 {
@@ -25,9 +26,9 @@ class ParseRequest
 			S_HTTP_END_R,
 			S_HTTP_END_N,
 			S_HEADER_FIELDS,
-			S_BODY,
-			S_BODY_DECODE,
-			S_END_R,
+			// S_BODY,
+			// S_BODY_DECODE,
+			// S_END_R,
 			S_END,
 		};
 	private:
@@ -36,6 +37,7 @@ class ParseRequest
 		int _major;
 		int _minor;
 		State _state;
+		ParseHeaderFields _parseHeaderFields;
 
 
 
@@ -47,6 +49,11 @@ class ParseRequest
 
 		void parse(char c);
 		void parse_path(char c);
+
+		std::string get_method()
+		{
+			return(_method);
+		}
 };
 
 //

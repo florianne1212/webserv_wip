@@ -1,30 +1,33 @@
 
 #include "parseRequest.hpp"
 
-ParseRequest::ParseRequest(/* args */)
+ParseRequest::ParseRequest(/* args */):
+_state(S_NOT_STARTED)
 {
 }
 
-ParseRequest::ParseRequest(ParseRequest const & copy)
-{
+// ParseRequest::ParseRequest(ParseRequest const & copy)
+// {
 
-}
+// }
 
 ParseRequest::~ParseRequest()
 {
 }
 
-ParseRequest& ParseRequest::operator=(ParseRequest const & ope)
-{
+// ParseRequest& ParseRequest::operator=(ParseRequest const & ope)
+// {
 
-}
+// }
 
 void ParseRequest::parse(char c)
 {
 	switch(_state)
 	{
+		
 		case S_NOT_STARTED:
 		{
+			printf("hey !");
 			if(c == '\r' || c == '\n')
 				break;
 			else
@@ -134,18 +137,40 @@ void ParseRequest::parse(char c)
 			_state = S_HTTP_END_R;
 			break;
 		}
+
 		case(S_HTTP_END_R):
 		{
-
+			if(c != '\n')
+				throw ("expected return line (\\n)");
+			else
+				_state = S_HTTP_END_N;
+			
+			break;
 		}
+
 		case(S_HTTP_END_N):
 		{
+			if(c == '\n')
+				_state = S_HTTP_END_N;
+			else if(c == '\r')
+				_state = S_END;
+			else
+			{
+				_state = S_HEADER_FIELDS;
+				_parseHeaderFields.parse(c);
+			}
 
+			break;
 		}
+
+		case(S_END):
+			break;
+
 		case(S_HEADER_FIELDS):
 		{
-			
+			_parseHeaderFields.parse(c);
+			if(_parseHeaderFields.get_state() == ParseHeaderFields::S_END)
+				_state = S_END;
 		}
-		// case(S)
 	}
 }

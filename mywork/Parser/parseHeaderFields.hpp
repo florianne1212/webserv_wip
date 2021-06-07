@@ -13,7 +13,8 @@ class ParseHeaderFields
 			S_SPACES_BEFORE_VALUE,
 			S_VALUE,
 			S_SPACES_AFTER_VALUE,
-			S_END_R,
+			// S_END_R,
+			// S_END_N,
 			S_END,
 		};
 	private:
@@ -30,7 +31,11 @@ class ParseHeaderFields
 		ParseHeaderFields& operator=(ParseHeaderFields const & ope);
 
 		void parse(char c);
-		void parse_path(char c);
+
+		State get_state()
+		{
+			return(_state);
+		}
 };
 
 //
