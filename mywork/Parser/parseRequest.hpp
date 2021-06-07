@@ -4,6 +4,7 @@
 #include <string>
 #include "parseHeaderFields.hpp"
 #include "stdio.h"
+#include "Message.hpp"
 
 class ParseRequest
 {
@@ -14,7 +15,7 @@ class ParseRequest
 			S_METHOD,
 			S_SPACES_BEFORE_PATH,
 			S_PATH,
-			S_HTTP_START,
+			// S_HTTP_START,
 			S_HTTP_H,
 			S_HTTP_HT,
 			S_HTTP_HTT,
@@ -53,6 +54,21 @@ class ParseRequest
 		std::string get_method()
 		{
 			return(_method);
+		}
+
+		std::string get_path()
+		{
+			return(_path);
+		}
+
+		int get_major()
+		{
+			return(_major);
+		}
+
+		int get_minor()
+		{
+			return(_minor);
 		}
 };
 

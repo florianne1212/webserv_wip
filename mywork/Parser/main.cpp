@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <iostream>
+#include "Message.hpp"
 
 int			main(int ac, char **av)
 {
@@ -13,6 +14,7 @@ int			main(int ac, char **av)
 	char	*line;
     int i = 0;
     ParseRequest _parserequest;
+	Message _message;
 
 	line = NULL;
 	fd = open(av[ac-1], O_RDONLY);
@@ -23,9 +25,12 @@ int			main(int ac, char **av)
         while (line[i])
         {
             _parserequest.parse(line[i]);
+
             i++;
         }
-        std::cout << _parserequest.get_method();
+        std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
+		std::cout << _parserequest.get_path() << "-\nmajor = ";
+		std::cout << _parserequest.get_major();
         free(line);
 	}
 	close(fd);

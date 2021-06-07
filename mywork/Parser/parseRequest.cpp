@@ -22,33 +22,39 @@ ParseRequest::~ParseRequest()
 
 void ParseRequest::parse(char c)
 {
+	std::string message;
 	switch(_state)
 	{
-		
 		case S_NOT_STARTED:
 		{
-			printf("hey !");
 			if(c == '\r' || c == '\n')
 				break;
 			else
+			{
+				if(c != ' ')
+					_method+=c;
 				_state = S_METHOD;
+			}
+			break;
 		}
 		case(S_METHOD):
 		{
 			if(c == ' ')
 			{
 				if(_state == S_NOT_STARTED)
-					throw ("there is no method");
+					printf("%s\n", "there is no method");
 				_state = S_SPACES_BEFORE_PATH;
 			}
 			else
 			{
 				if(islower(c))
-					throw ("method is supposed to be uppercase");
+					printf("%s\n", "method is supposed to be uppercase");
 				if(_method.length() > 15)
-					throw ("method can't be that long");
+					printf("%s\n", "method can't be that long");
+				_method += c;
 			}
-			_method += c;
+			
+			break;
 		}
 		case(S_SPACES_BEFORE_PATH):
 		{
@@ -57,65 +63,60 @@ void ParseRequest::parse(char c)
 				if(c == '/')
 					_state = S_PATH;
 				else
-					throw ("method can't be that long");
+					printf("%s\n", "must have path");
 			}
 			break;
 		}
 		case(S_PATH):
 		{
 			if(c != ' ')
-				_method += c;
+				_path += c;
 			else
-				_state = S_HTTP_START;
-		}
-		case(S_HTTP_START):
-		{
-			if(c != 'H')
-				throw ("wrong charachter must be : H");
-			_state = S_HTTP_H;
+				_state = S_HTTP_H;
+			
 			break;
 		}
 		case(S_HTTP_H):
 		{
-			if(c != 'T')
-				throw ("wrong charachter must be : T");
+			if(c != 'H')
+				printf("%s\n", "wrong charachter must be : H");
 			_state = S_HTTP_HT;
 			break;
 		}
 		case(S_HTTP_HT):
 		{
 			if(c != 'T')
-				throw ("wrong charachter must be : T");
+				printf("%s\n", "wrong charachter must be : T");
 			_state = S_HTTP_HTT;
 			break;
 		}
 		case(S_HTTP_HTT):
 		{
-			if(c != 'P')
-				throw ("wrong charachter must be : P");
+			if(c != 'T')
+				printf("%s\n", "wrong charachter must be : T");
 			_state = S_HTTP_HTTP;
 			break;
 		}
 		case(S_HTTP_HTTP):
 		{
-			if(c != '/')
-				throw ("wrong charachter must be : /");
+			if(c != 'P')
+				printf("%s\n", "wrong charachter must be : P");
 			_state = S_HTTP_SLASH;
 			break;
 		}
 		case(S_HTTP_SLASH):
 		{
 			if(c != '/')
-				throw ("wrong charachter must be : /");
+				printf("%s\n", "wrong charachter must be : /");
 			_state = S_HTTP_MAJOR;
 			break;
 		}
 		case(S_HTTP_MAJOR):
 		{
 			if(!isdigit(c))
-				throw ("http version major must be a number");
+				printf("%s\n", "http version major must be a number");
 			if(c != 1)
-				throw ("wrong version only HTTP/1.1 is supported");
+				printf("%s\n", "wrong version only HTTP/1.1 is supported");
 			_major = c - '0';
 			_state = S_HTTP_DOT;
 			break;
@@ -123,16 +124,16 @@ void ParseRequest::parse(char c)
 		case(S_HTTP_DOT):
 		{
 			if(!isdigit(c != '.'))
-				throw ("wrong character must be : .");
+				printf("%s\n", "wrong character must be : .");
 			_state = S_HTTP_MINOR;
 			break;
 		}
 		case(S_HTTP_MINOR):
 		{
 			if(!isdigit(c))
-				throw ("http version minor must be a number");
+				printf("%s\n", "http version minor must be a number");
 			if(c != 1)
-				throw ("wrong version only HTTP/1.1 is supported");
+				printf("%s\n", "wrong version only HTTP/1.1 is supported");
 			_minor = c - '0';
 			_state = S_HTTP_END_R;
 			break;
@@ -141,7 +142,7 @@ void ParseRequest::parse(char c)
 		case(S_HTTP_END_R):
 		{
 			if(c != '\n')
-				throw ("expected return line (\\n)");
+				printf("%s\n", "expected return line (\\n)");
 			else
 				_state = S_HTTP_END_N;
 			
