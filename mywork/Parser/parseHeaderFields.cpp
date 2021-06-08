@@ -29,6 +29,7 @@ void ParseHeaderFields::parse(char c)
 		{
 			if(c == ' ')
 			{
+				std::cout << "pouet";
 				if(_field.empty())
 					throw ("there is some space before field");
 				else
@@ -113,16 +114,14 @@ void ParseHeaderFields::parse(char c)
 		case S_VALUE:
 		{
 			if (c == ' ')
-				_state = S_SPACES_AFTER_VALUE;
+				_state = S_END;
 			else if (c == '\r')
 			{
-				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
 				add_header();
 				_state = S_END_R;
 			}
 			else if (c == '\n')
 			{
-				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
 				add_header();
 				_state = S_END_N;
 			}
@@ -137,24 +136,20 @@ void ParseHeaderFields::parse(char c)
 			std::cout << "value : " << _value << "\n" ;
 			if (c == ' ')
 			{
-				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
 				_state = S_SPACES_AFTER_VALUE;
-			}
-			else if (c == '\r')
-			{
-				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
-				add_header();
-				_state = S_END_R;
 			}
 			else if (c == '\n')
 			{
-				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
+				add_header();
+				_state = S_END_N;
+			}
+			else if (c == '\r')
+			{
 				add_header();
 				_state = S_END_N;
 			}
 			else
 			{
-				std::cout << "HERE ??????????????????? _" << c << "_ ";
 				_value += ' ';
 				_value += c;
 				_state = S_VALUE;
@@ -205,7 +200,7 @@ void ParseHeaderFields::parse(char c)
 void ParseHeaderFields::add_header()
 {
 	_headers.insert(std::pair<std::string, std::string>(_field, _value));
-
+	std::cout << "value before clear: " << _value << "\n" ;
 	_field.clear();
 	_value.clear();
 }

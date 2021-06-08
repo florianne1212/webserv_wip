@@ -6,46 +6,37 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include "Message.hpp"
 
 int			main(int ac, char **av)
 {
-	int		fd;
-	// FILE	*fdf;
-	char	*line;
-    int i = 0;
+
+ 
     ParseRequest _parserequest;
 	ParseHeaderFields _parseheader;
 	Message _message;
+	const char *req = ""
+		"GET /index.html HTTP/1.1\r\n"
+		"Host: localhost:8080\r\n"
+		"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
+		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
+		"Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3\r\n"
+		"Accept-Encoding: gzip, deflate\r\n\r\n";
 
-	// char str1[] = "GET /index.html HTTP/1.1\n";
-	// char str2[] = "Host: localhost:8080\n";
-	// char str3[] = "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\n";
+	std::string line = req;
 
-	// fdf = fopen("req", "w");
-    // fwrite(str1 , 1 , sizeof(str1) , fdf );
-	// fwrite(str2 , 1 , sizeof(str1) , fdf );
-	// fwrite(str3 , 1 , sizeof(str3) , fdf );
-    // fclose(fdf);
 
-	line = NULL;
-	fd = open(av[ac - 1], O_RDONLY);
-	while (get_next_line(fd, &line))
+	for (size_t i = 0; i < line.length(); i++)
 	{
-		// printf("%s\n",line);
-        i = 0;
-        while (line[i])
-        {
-            _parserequest.parse(line[i]);
+		char c = line[i];
+		_parserequest.parse(c);
 
-            i++;
-        }
-        std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
-		std::cout << _parserequest.get_path() << "-\nmajor = ";
-		std::cout << _parserequest.get_major() << "-\nminor = ";
-		std::cout << _parserequest.get_minor();
-		std::cout << _parseheader.get_field();
-        free(line);
-	}
-	close(fd);
+     
+	}   
+	std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
+	std::cout << _parserequest.get_path() << "-\nmajor = ";
+	std::cout << _parserequest.get_major() << "-\nminor = ";
+	std::cout << _parserequest.get_minor();
+	std::cout << _parseheader.get_field();
 }

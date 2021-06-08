@@ -135,7 +135,7 @@ void ParseRequest::parse(char c)
 			if(c != '1')
 				printf("%s\n", "wrong version only HTTP/1.1 is supported");
 			_minor = c - '0';
-			_state = S_HTTP_END_N;
+			_state = S_HTTP_END_R;
 			break;
 		}
 
