@@ -44,7 +44,7 @@ void ParseHeaderFields::parse(char c)
 		}
 		case(S_COLON):
 		{
-			std::cout << _field;
+			std::cout << "field :" << _field << "\n";
 			if(c == ' ')
 				_state = S_SPACES_BEFORE_VALUE;
 			
@@ -60,64 +60,152 @@ void ParseHeaderFields::parse(char c)
 			}
 			break;
 		}
-		case(S_VALUE):
-		{
-			if(c == ' ')
-				_state = S_SPACES_AFTER_VALUE;
-			else  
-				_value += c;
-			break;
-		}
-		case(S_SPACES_AFTER_VALUE):
-		{
-			// if(c == '\n')
-			// 	_state=S_END;
-			// else if(c == '\r')
-			// 	_state=S_END;
-			// else if(c == ' ')
-			// {
-			// 	_value +=c;
-			// 	_state = S_VALUE;
-			// }
-			_state = S_END;
-			break;
-		}
-		// case (S_END_R):
-		// {
-
-		// }
-		// case (S_END):
-		// {
-			
-		// }
-
-		// case(S_END_R):
-		// {
-		// 	if(c != '\n')
-		// 		throw ("expected return line (\\n)");
-		// 	else
-		// 		_state = S_HTTP_END_N;
-			
-		// 	break;
-		// }
-
-		// case(S_END_N):
+		// case(S_VALUE):
 		// {
 		// 	if(c == '\n')
-		// 		_state = S_HTTP_END_N;
+		// 		_state=S_END_N;
 		// 	else if(c == '\r')
-		// 		_state = S_END;
+		// 		_state=S_END_R;
+		// 	else if (c == ' ')
+		// 		_state = S_SPACES_AFTER_VALUE;
+		// 	else  
+		// 		_value += c;
+		// 	break;
+		// }
+		// case(S_SPACES_AFTER_VALUE):
+		// {
+		// 	std::cout << "value :"<< _value << "\n";
+		// 	if(c == '\n')
+		// 		_state=S_END_N;
+		// 	else if(c == '\r')
+		// 		_state=S_END_R;
+		// 	else if (c == ' ')
+		// 		_state = S_SPACES_AFTER_VALUE;
 		// 	else
 		// 	{
-		// 		_state = S_HEADER_FIELDS;
-		// 		_parseHeaderFields.parse(c);
+		// 		_value +=c;
+		// 		_state = S_VALUE;
 		// 	}
-
 		// 	break;
 		// }
 
-		case(S_END):
+		// case (S_END_R):
+		// {
+		// 	if(c != '\n')
+		// 		printf("%s\n", "expected return line (\\n)");
+		// 	else
+		// 		_state = S_END_N;
+			
+		// 	break;
+		// }
+
+		// case (S_END_N):
+		// {
+		// 	break;
+		// }
+
+		
+
+		// case(S_END):
+		// 	break;
+		
+
+		case S_VALUE:
+		{
+			if (c == ' ')
+				_state = S_SPACES_AFTER_VALUE;
+			else if (c == '\r')
+			{
+				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
+				add_header();
+				_state = S_END_R;
+			}
+			else if (c == '\n')
+			{
+				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
+				add_header();
+				_state = S_END_N;
+			}
+			else
+				_value += c;
+
 			break;
-		// case(S)
+		}
+
+		case S_SPACES_AFTER_VALUE:
+		{
+			std::cout << "value : " << _value << "\n" ;
+			if (c == ' ')
+			{
+				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
+				_state = S_SPACES_AFTER_VALUE;
+			}
+			else if (c == '\r')
+			{
+				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
+				add_header();
+				_state = S_END_R;
+			}
+			else if (c == '\n')
+			{
+				std::cout << "HERE !!!!!!!!!!!!!!!!!!";
+				add_header();
+				_state = S_END_N;
+			}
+			else
+			{
+				std::cout << "HERE ??????????????????? _" << c << "_ ";
+				_value += ' ';
+				_value += c;
+				_state = S_VALUE;
+			}
+
+			break;
+		}
+
+		case S_END_R:
+		{
+			if (c == '\n')
+				_state = S_END_N;
+			else
+				printf("%s\n","Expected a \\n");
+
+			break;
+		}
+
+		case S_END_N:
+		{
+			if (c == '\r')
+				_state = S_END_R2;
+			else if (c == '\n')
+				_state = S_END;
+			else
+			{
+				_state = S_FIELD;
+			}
+
+			break;
+		}
+
+		case S_END_R2:
+		{
+			if (c == '\n')
+				_state = S_END;
+			else
+				throw printf("%s\n","Expected a \\n");
+
+			break;
+		}
+
+		case S_END:
+			return;
 	}
+}
+
+void ParseHeaderFields::add_header()
+{
+	_headers.insert(std::pair<std::string, std::string>(_field, _value));
+
+	_field.clear();
+	_value.clear();
 }

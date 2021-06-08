@@ -2,6 +2,7 @@
 #define PARSEHEADERFIELDS_HPP
 
 #include <string>
+#include <map>
 
 class ParseHeaderFields
 {
@@ -13,14 +14,16 @@ class ParseHeaderFields
 			S_SPACES_BEFORE_VALUE,
 			S_VALUE,
 			S_SPACES_AFTER_VALUE,
-			// S_END_R,
-			// S_END_N,
+			S_END_R,
+			S_END_N,
+			S_END_R2,
 			S_END,
 		};
 	private:
 		std::string _field;
 		std::string _value;
 		State _state;
+		std::map<std::string, std::string> _headers;
 
 
 
@@ -31,6 +34,8 @@ class ParseHeaderFields
 		ParseHeaderFields& operator=(ParseHeaderFields const & ope);
 
 		void parse(char c);
+
+		void add_header();
 
 		State get_state()
 		{

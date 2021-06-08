@@ -123,8 +123,8 @@ void ParseRequest::parse(char c)
 		}
 		case(S_HTTP_DOT):
 		{
-			if(!isdigit(c != '.'))
-				printf("%s\n", "wrong character must be : .");
+			if(c != '.')
+				printf("%s\n", "wrong character must be : '.'");
 			_state = S_HTTP_MINOR;
 			break;
 		}
