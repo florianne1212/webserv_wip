@@ -7,19 +7,26 @@ _state(S_FIELD)
 {
 }
 
-// ParseHeaderFields::ParseHeaderFields(ParseHeaderFields const & copy)
-// {
-
-// }
+ParseHeaderFields::ParseHeaderFields(ParseHeaderFields const & copy)
+{
+	*this = copy;
+}
 
 ParseHeaderFields::~ParseHeaderFields()
 {
 }
 
-// ParseHeaderFields& ParseHeaderFields::operator=(ParseHeaderFields const & ope)
-// {
-
-// }
+ParseHeaderFields& ParseHeaderFields::operator=(ParseHeaderFields const & ope)
+{
+    if (this != &ope)
+    {
+        this->_headers = ope._headers;
+        this->_state = ope._state;
+		this->_value = ope._value;
+        this->_field = ope._field;
+    }
+    return (*this);
+}
 
 void ParseHeaderFields::parse(char c)
 {
@@ -45,7 +52,6 @@ void ParseHeaderFields::parse(char c)
 		}
 		case(S_COLON):
 		{
-			std::cout << "field :" << _field << "\n";
 			if(c == ' ')
 				_state = S_SPACES_BEFORE_VALUE;
 			
@@ -61,60 +67,10 @@ void ParseHeaderFields::parse(char c)
 			}
 			break;
 		}
-		// case(S_VALUE):
-		// {
-		// 	if(c == '\n')
-		// 		_state=S_END_N;
-		// 	else if(c == '\r')
-		// 		_state=S_END_R;
-		// 	else if (c == ' ')
-		// 		_state = S_SPACES_AFTER_VALUE;
-		// 	else  
-		// 		_value += c;
-		// 	break;
-		// }
-		// case(S_SPACES_AFTER_VALUE):
-		// {
-		// 	std::cout << "value :"<< _value << "\n";
-		// 	if(c == '\n')
-		// 		_state=S_END_N;
-		// 	else if(c == '\r')
-		// 		_state=S_END_R;
-		// 	else if (c == ' ')
-		// 		_state = S_SPACES_AFTER_VALUE;
-		// 	else
-		// 	{
-		// 		_value +=c;
-		// 		_state = S_VALUE;
-		// 	}
-		// 	break;
-		// }
-
-		// case (S_END_R):
-		// {
-		// 	if(c != '\n')
-		// 		printf("%s\n", "expected return line (\\n)");
-		// 	else
-		// 		_state = S_END_N;
-			
-		// 	break;
-		// }
-
-		// case (S_END_N):
-		// {
-		// 	break;
-		// }
-
-		
-
-		// case(S_END):
-		// 	break;
-		
-
 		case S_VALUE:
 		{
 			if (c == ' ')
-				_state = S_END;
+				_state = S_SPACES_AFTER_VALUE;
 			else if (c == '\r')
 			{
 				add_header();
@@ -133,11 +89,8 @@ void ParseHeaderFields::parse(char c)
 
 		case S_SPACES_AFTER_VALUE:
 		{
-			std::cout << "value : " << _value << "\n" ;
 			if (c == ' ')
-			{
 				_state = S_SPACES_AFTER_VALUE;
-			}
 			else if (c == '\n')
 			{
 				add_header();
@@ -163,7 +116,7 @@ void ParseHeaderFields::parse(char c)
 			if (c == '\n')
 				_state = S_END_N;
 			else
-				printf("%s\n","Expected a \\n");
+				printf("%s\n","there is supposed to be a '\\n");
 
 			break;
 		}
@@ -176,9 +129,9 @@ void ParseHeaderFields::parse(char c)
 				_state = S_END;
 			else
 			{
+				_field += c;
 				_state = S_FIELD;
 			}
-
 			break;
 		}
 
@@ -187,7 +140,7 @@ void ParseHeaderFields::parse(char c)
 			if (c == '\n')
 				_state = S_END;
 			else
-				throw printf("%s\n","Expected a \\n");
+				printf("%s\n","there is supposed to be a '\\n");
 
 			break;
 		}
@@ -200,7 +153,7 @@ void ParseHeaderFields::parse(char c)
 void ParseHeaderFields::add_header()
 {
 	_headers.insert(std::pair<std::string, std::string>(_field, _value));
-	std::cout << "value before clear: " << _value << "\n" ;
+	// std::cout << "value before clear: " << _value << "\n" ;
 	_field.clear();
 	_value.clear();
 }

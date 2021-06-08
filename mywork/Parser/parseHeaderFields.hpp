@@ -46,6 +46,11 @@ class ParseHeaderFields
 		{
 			return(_field);
 		}
+
+		std::map<std::string, std::string> get_headers_map()
+		{
+			return(_headers);
+		}
 };
 
 //

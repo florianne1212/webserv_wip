@@ -70,6 +70,12 @@ class ParseRequest
 		{
 			return(_minor);
 		}
+
+		ParseHeaderFields get_parserfields()
+		{
+			return(_parseHeaderFields);
+		}
+		 
 };
 
 //

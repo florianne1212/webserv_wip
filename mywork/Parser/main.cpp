@@ -9,7 +9,7 @@
 #include <fstream>
 #include "Message.hpp"
 
-int			main(int ac, char **av)
+int			main()
 {
 
  
@@ -34,9 +34,16 @@ int			main(int ac, char **av)
 
      
 	}   
-	std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
-	std::cout << _parserequest.get_path() << "-\nmajor = ";
-	std::cout << _parserequest.get_major() << "-\nminor = ";
-	std::cout << _parserequest.get_minor();
-	std::cout << _parseheader.get_field();
+	// std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
+	// std::cout << _parserequest.get_path() << "-\nmajor = ";
+	// std::cout << _parserequest.get_major() << "-\nminor = ";
+	// std::cout << _parserequest.get_minor();
+	// std::cout << _parseheader.get_field();
+	_parseheader = _parserequest.get_parserfields();
+	std::map<std::string, std::string>  mymap = _parseheader.get_headers_map();
+
+	for (std::map<std::string, std::string>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+    	std::cout << it->first << " => " << it->second << '\n';
+
+	
 }
