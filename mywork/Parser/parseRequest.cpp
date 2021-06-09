@@ -130,7 +130,6 @@ void ParseRequest::parse(char c)
 		}
 		case(S_HTTP_MINOR):
 		{
-			printf("%s _c = %c _\n", "TEST", c);
 			if(!isdigit(c))
 				printf("%s _c = %c _\n", "http version minor must be a number", c);
 			else if(c != '1')

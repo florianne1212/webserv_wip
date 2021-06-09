@@ -66,6 +66,9 @@
 		"deque": "cpp",
 		"memory_resource": "cpp",
 		"fstream": "cpp",
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"iomanip": "cpp",
+		"stack": "cpp",
+		"list": "cpp"
 	}
 }

@@ -7,9 +7,9 @@ private:
     /* data */
 public:
     HttpMethods(/* args */);
-    HttpMethods(HttpMethods const & copy);
+    // HttpMethods(HttpMethods const & copy);
     ~HttpMethods();
-    HttpMethods & operator=(HttpMethods const & ope);
+    // HttpMethods & operator=(HttpMethods const & ope);
 
 public:
 

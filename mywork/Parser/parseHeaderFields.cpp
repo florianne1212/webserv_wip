@@ -36,7 +36,6 @@ void ParseHeaderFields::parse(char c)
 		{
 			if(c == ' ')
 			{
-				std::cout << "pouet";
 				if(_field.empty())
 					throw ("there is some space before field");
 				else
@@ -157,7 +156,6 @@ void ParseHeaderFields::parse(char c)
 void ParseHeaderFields::add_header()
 {
 	_headers.insert(std::pair<std::string, std::string>(_field, _value));
-	// std::cout << "value before clear: " << _value << "\n" ;
 	_field.clear();
 	_value.clear();
 }

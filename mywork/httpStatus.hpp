@@ -2,12 +2,14 @@
 #define HttpStatus_HPP
 
 #include <string>
+#include <map>
 
 class HttpStatus
 {
     private:
         int _code;
 		std::string _message;
+		std::map<int, std::string> _status_error;
 
     public:
         HttpStatus();

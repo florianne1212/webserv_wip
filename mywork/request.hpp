@@ -5,13 +5,14 @@
 #include <map>
 #include <vector>
 
+
 class Request
 {
 	private:
 		std::string _methods;
 		std::string _url;
 		std::string _version;
-		std::map<std::string, std::string> headers;
+		std::map<std::string, std::string> _headers;
 		
 
 	public:
@@ -24,10 +25,12 @@ class Request
 		std::string getMethods();
 		std::string getUrl();
 		std::string getVersion();
+		std::map<std::string, std::string> getHeaders();
 
 		void setMethods(std::string str);
 		void setUrl(std::string str);
 		void setVersion(std::string str);
+		void setHeaders(std::map<std::string, std::string> header);
 };
 
 //methods

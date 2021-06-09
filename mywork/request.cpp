@@ -13,23 +13,24 @@
 // }
 
 
-Request::Request(/* args */)
-{
-}
-
-Request::Request(Request const & copy)
+Request::Request()
 {
 
 }
+
+// Request::Request(Request const & copy)
+// {
+
+// }
 
 Request::~Request()
 {
 }
 
-Request& Request::operator=(Request const & ope)
-{
+// Request& Request::operator=(Request const & ope)
+// {
     
-}
+// }
 
 std::string	Request::getMethods()
 {
@@ -47,6 +48,11 @@ std::string	Request::getVersion()
 	return(this->_version);
 }
 
+std::map<std::string, std::string> Request::getHeaders()
+{
+	return(this->_headers);
+}
+
 void	Request::setMethods(std::string str)
 {
 	this->_methods = str;
@@ -60,4 +66,9 @@ void	Request::setUrl(std::string str)
 void	Request::setVersion(std::string str)
 {
 	this->_version = str;
+}
+
+void Request::setHeaders(std::map<std::string, std::string> header)
+{
+	this->_headers = header;
 }

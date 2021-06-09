@@ -7,9 +7,9 @@ private:
     /* data */
 public:
     HttpHeaders(/* args */);
-    HttpHeaders(HttpHeaders const & copy);
+    // HttpHeaders(HttpHeaders const & copy);
     ~HttpHeaders();
-    HttpHeaders& operator=(HttpHeaders const & ope);
+    // HttpHeaders& operator=(HttpHeaders const & ope);
 };
 
 //
