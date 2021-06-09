@@ -130,13 +130,28 @@ void ParseRequest::parse(char c)
 		}
 		case(S_HTTP_MINOR):
 		{
+			printf("%s _c = %c _\n", "TEST", c);
 			if(!isdigit(c))
-				printf("%s\n", "http version minor must be a number");
-			if(c != '1')
+				printf("%s _c = %c _\n", "http version minor must be a number", c);
+			else if(c != '1')
 				printf("%s\n", "wrong version only HTTP/1.1 is supported");
-			_minor = c - '0';
-			_state = S_HTTP_END_R;
+			else
+			{
+				_minor = c - '0';
+				_state = S_AFTER_HTTP;
+			}
+			
 			break;
+		}
+
+		case(S_AFTER_HTTP):
+		{
+			if(c == '\r')
+				_state = S_HTTP_END_R;
+			else if(c == '\n')
+				_state = S_HTTP_END_N;
+			else
+				printf("%s\n", "there is suposed to be n or r");
 		}
 
 		case(S_HTTP_END_R):
@@ -164,14 +179,17 @@ void ParseRequest::parse(char c)
 			break;
 		}
 
-		case(S_END):
-			break;
-
 		case(S_HEADER_FIELDS):
 		{
 			_parseHeaderFields.parse(c);
 			if(_parseHeaderFields.get_state() == ParseHeaderFields::S_END)
+			{
 				_state = S_END;
+			}
 		}
+		
+		case(S_END):
+			break;
+
 	}
 }

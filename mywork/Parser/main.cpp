@@ -34,10 +34,10 @@ int			main()
 
      
 	}   
-	// std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
-	// std::cout << _parserequest.get_path() << "-\nmajor = ";
-	// std::cout << _parserequest.get_major() << "-\nminor = ";
-	// std::cout << _parserequest.get_minor();
+	std::cout << "method = -" << _parserequest.get_method() << "-\npath = ";
+	std::cout << _parserequest.get_path() << "-\nmajor = ";
+	std::cout << _parserequest.get_major() << "-\nminor = ";
+	std::cout << _parserequest.get_minor() << "\n";
 	// std::cout << _parseheader.get_field();
 	_parseheader = _parserequest.get_parserfields();
 	std::map<std::string, std::string>  mymap = _parseheader.get_headers_map();

@@ -124,9 +124,13 @@ void ParseHeaderFields::parse(char c)
 		case S_END_N:
 		{
 			if (c == '\r')
+			{
 				_state = S_END_R2;
+			}
 			else if (c == '\n')
+			{
 				_state = S_END;
+			}
 			else
 			{
 				_field += c;
