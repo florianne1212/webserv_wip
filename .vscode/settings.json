@@ -69,6 +69,7 @@
 		"iostream": "cpp",
 		"iomanip": "cpp",
 		"stack": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"filesystem": "cpp"
 	}
 }
