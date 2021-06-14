@@ -3,6 +3,7 @@
 #include "../request.hpp"
 #include "../response.hpp"
 #include "../Client.hpp"
+#include "../File.hpp"
 #include <iostream>
 
 class DeleteMethod

@@ -22,18 +22,25 @@ void GetMethod::handleGet(Client client, Request request, Response response)
 {
 	
     (void)client;
-	(void)response;
+	// (void)response;
 	(void)request;
 	std::cout << "GET\n";
 
-		// if (fileGet.isPresent()) {
-	// 	if (fileGet.isFile()) {
-	// 		response.setBody(open(file));
-	// 	} 
-	// 	else if (fileGet.isDirectory()) {
-	// 		response.setBody(listFiles(file));
-	// 	}	
-	// }
-	// else
-	// 	response.setStatus(404);
+	File fileGet(request.getUrl());
+
+	if (fileGet.isPresent()) {
+		if (fileGet.isFile()) {
+			std::cout << "it's a file\n";
+			// response.setBody(open(file));
+		} 
+		else if (fileGet.isDirectory()) {
+			std::cout << "it's a directory\n";
+			// response.setBody(listFiles(file));
+		}	
+	}
+	else
+	{
+		std::cout << "404 not found\n";
+		response.setStatus(404);
+	}
 }
