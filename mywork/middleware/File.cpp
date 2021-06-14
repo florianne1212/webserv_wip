@@ -11,20 +11,20 @@ _path(path)
 
 }
 
-File::File(File const & copy)
-{
+// File::File(File const & copy)
+// {
 
-}
+// }
 
 File::~File()
 {
 
 }
 
-File& File::operator=(File const & ope)
-{
+// File& File::operator=(File const & ope)
+// {
 
-}
+// }
 
 bool File::isPresent()
 {

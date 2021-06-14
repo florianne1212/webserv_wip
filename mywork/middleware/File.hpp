@@ -16,14 +16,12 @@ class File{
 	public:
 	    File(/* args */);
 		File(std::string path);
-		File(File const & copy);
+		// File(File const & copy);
 		~File();
-		File& operator=(File const & ope);
+		// File& operator=(File const & ope);
 
 		bool isPresent();
 		bool isFile();
-		bool isDirectory();
-
 		bool isDirectory();
 
 

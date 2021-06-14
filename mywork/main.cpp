@@ -24,7 +24,7 @@ int			main()
 	ParseHeaderFields _parseheader;
 	Request _request;
 	const char *req = ""
-		"GET /index.html HTTP/1.1\r\n"
+		"DELETEE /index.html HTTP/1.1\r\n"
 		"Host: localhost:8080\r\n"
 		"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
 		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
@@ -45,10 +45,10 @@ int			main()
 	std::map<std::string, std::string>  mymap = _parseheader.get_headers_map();
 	_request.setHeaders(mymap);
 
-	std::cout << "method = -" << _request.getMethods() << "-\npath = ";
-	std::cout << _request.getUrl() << "-\nmajor = ";
-	std::cout << _parserequest.get_major() << "-\nminor = ";
-	std::cout << _parserequest.get_minor() << "\n";
+	// std::cout << "method = -" << _request.getMethods() << "-\npath = ";
+	// std::cout << _request.getUrl() << "-\nmajor = ";
+	// std::cout << _parserequest.get_major() << "-\nminor = ";
+	// std::cout << _parserequest.get_minor() << "\n";
 	// std::cout << _parseheader.get_field();
 	
 	std::map<std::string, std::string> reqmap = _request.getHeaders();
@@ -58,7 +58,7 @@ int			main()
 	Request &request = _request;
 	Response response;
 
-	std::list<IMiddleware*> middlewares;
+	std::list<IMiddleware *> middlewares;
 	middlewares.push_back(new MethodMiddleware());
 
 	MiddlewareChain chain(middlewares, client, request, response);

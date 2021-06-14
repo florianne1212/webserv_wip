@@ -1,5 +1,11 @@
+#ifndef MIDDLEWARECHAIN_HPP
+# define MIDDLEWARECHAIN_HPP
+
 #include <list>
 #include "IMiddleware.hpp"
+#include "../Client.hpp"
+
+class IMiddleware;
 
 class MiddlewareChain {
 
@@ -17,3 +23,5 @@ class MiddlewareChain {
 		void operator ()();
 
 };
+
+#endif

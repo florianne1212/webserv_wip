@@ -1,3 +1,6 @@
+#ifndef METHODMIDDLEWARE_HPP
+# define METHODMIDDLEWARE_HPP
+
 #include "IMiddleware.hpp"
 
 class MethodMiddleware : public IMiddleware {
@@ -8,3 +11,5 @@ class MethodMiddleware : public IMiddleware {
 		virtual void handle(Client &client, Request &request, Response &response, MiddlewareChain &next);
 
 };
+
+#endif

@@ -4,8 +4,24 @@ Response::Response(/* args */)
 {
 }
 
+Response::Response (Response const & copy)
+{
+	*this = copy;
+}
+
 Response::~Response()
 {
+}
+
+Response& Response::operator=(Response const & ope)
+{
+	if (this != &ope)
+    {
+        this->_status = ope._status;
+		this->_body = ope._body;
+        this->_headers = ope._headers;
+    }
+    return (*this);
 }
 
 std::string Response::getBody()

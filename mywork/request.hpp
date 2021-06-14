@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <string>
 
 
 class Request
@@ -17,7 +18,7 @@ class Request
 
 	public:
 		Request();
-		Request (Request const & copy);
+		Request(Request const & copy);
 		~Request();
 		Request& operator=(Request const & ope);
 

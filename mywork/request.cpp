@@ -1,5 +1,5 @@
 #include "request.hpp"
-#include <string>
+
 
 // std::vector<std::string> Request::createMethods()
 // {
@@ -18,19 +18,26 @@ Request::Request()
 
 }
 
-// Request::Request(Request const & copy)
-// {
-
-// }
+Request::Request(Request const & copy)
+{
+	*this = copy;
+}
 
 Request::~Request()
 {
 }
 
-// Request& Request::operator=(Request const & ope)
-// {
-    
-// }
+Request& Request::operator=(Request const & ope)
+{
+	if (this != &ope)
+	{
+		this->_methods = ope._methods;
+		this->_url = ope._url;
+		this->_version = ope._version;
+		this->_headers = ope._headers;
+	}
+	return (*this);
+}
 
 std::string	Request::getMethods()
 {
