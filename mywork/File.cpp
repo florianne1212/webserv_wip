@@ -43,3 +43,11 @@ bool File::isDirectory()
 {
 	return(S_ISDIR(_stats.st_mode));
 }
+
+bool File::fileDelete()
+{
+	if (remove(_path.c_str()) == 0)
+		return (true);
+	else
+		return (false);
+}

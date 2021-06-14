@@ -23,6 +23,7 @@ class File{
 		bool isPresent();
 		bool isFile();
 		bool isDirectory();
+		bool fileDelete();
 
 
 };

@@ -12,11 +12,25 @@ void DeleteMethod::handleDelete(Client client, Request request, Response respons
 {
 	
     (void)client;
-	(void)response;
+	// (void)response;
 	(void)request;
 	std::cout << "DELETE\n";
 
-		// if (fileGet.isPresent()) {
+	File fileDelete(request.getUrl());
+	
+
+	if (fileDelete.isPresent()) {
+		if(fileDelete.fileDelete())
+			response.setStatus(200);
+		else
+			response.setStatus(204);
+		
+	}
+	else
+	{
+		response.setStatus(204);
+	}
+	
 	// 	if (fileGet.isFile()) {
 	// 		response.setBody(open(file));
 	// 	} 
@@ -25,5 +39,5 @@ void DeleteMethod::handleDelete(Client client, Request request, Response respons
 	// 	}	
 	// }
 	// else
-	// 	response.setStatus(404);
+	// 	
 }
