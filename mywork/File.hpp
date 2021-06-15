@@ -24,6 +24,7 @@ class File{
 		bool isFile();
 		bool isDirectory();
 		bool fileDelete();
+		bool fileCreate();
 
 
 };

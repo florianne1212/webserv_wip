@@ -51,3 +51,9 @@ bool File::fileDelete()
 	else
 		return (false);
 }
+
+bool fileCreate()
+{
+	//parse path
+	//
+}
