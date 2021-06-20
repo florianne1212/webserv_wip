@@ -12,8 +12,6 @@ void PostMethod::handlePost(Client client, Request request, Response response)
 {
 	
     (void)client;
-	(void)response;
-	(void)request;
 	std::cout << "POST\n";
 
 	File filePost(request.getUrl());
@@ -22,7 +20,7 @@ void PostMethod::handlePost(Client client, Request request, Response response)
 		response.setStatus(200);
 	}
 	else {
-		filePost.fileCreate();
+		filePost.fileCreate(request.getUrl());
 	}
 		
 }

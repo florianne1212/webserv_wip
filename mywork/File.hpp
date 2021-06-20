@@ -3,8 +3,13 @@
 
 #include <string>
 #include <sys/stat.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <list>
+
 
 class File{
 
@@ -24,7 +29,8 @@ class File{
 		bool isFile();
 		bool isDirectory();
 		bool fileDelete();
-		bool fileCreate();
+		bool fileCreate(std::string filename);
+		std::list<std::string> listDirFiles();
 
 
 };

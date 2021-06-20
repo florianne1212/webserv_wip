@@ -34,7 +34,10 @@ void GetMethod::handleGet(Client client, Request request, Response response)
 			// response.setBody(open(file));
 		} 
 		else if (fileGet.isDirectory()) {
-			std::cout << "it's a directory\n";
+			std::list<std::string> files_list = fileGet.listDirFiles();
+
+			for (std::list<std::string>::iterator it=files_list.begin(); it != files_list.end(); ++it)
+   				std::cout << "file =" << *it << '\n';
 			// response.setBody(listFiles(file));
 		}	
 	}

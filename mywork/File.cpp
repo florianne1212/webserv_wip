@@ -52,8 +52,33 @@ bool File::fileDelete()
 		return (false);
 }
 
-bool fileCreate()
+bool File::fileCreate(std::string filename)
 {
-	//parse path
-	//
+	int fd;
+
+	fd = open(filename.c_str(), O_CREAT);
+
+	close(fd);
+
+	return(true);
+
+}
+
+std::list<std::string> File::listDirFiles()
+{
+	DIR *d;
+	struct dirent *dir;
+	std::list<std::string> files_list;
+
+	d = opendir(_path.c_str());
+	if(d)
+	{
+		while ((dir = readdir(d)) != NULL)
+		{
+			files_list.push_back(dir->d_name);
+		}
+		closedir(d);
+	}
+	
+	return(files_list);
 }
