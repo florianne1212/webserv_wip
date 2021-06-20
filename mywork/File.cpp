@@ -82,3 +82,16 @@ std::list<std::string> File::listDirFiles()
 	
 	return(files_list);
 }
+
+std::string File::find_content()
+{
+	// int fd;
+	// std::string content;
+
+	std::ifstream ifs(_path.c_str());
+	std::string content( (std::istreambuf_iterator<char>(ifs) ),
+						(std::istreambuf_iterator<char>()) );
+
+	return(content);
+	
+}

@@ -18,6 +18,7 @@ void PostMethod::handlePost(Client client, Request request, Response response)
 
 	if (filePost.isPresent()) {
 		response.setStatus(200);
+		
 	}
 	else {
 		filePost.fileCreate(request.getUrl());

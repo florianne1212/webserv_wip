@@ -9,7 +9,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <list>
-
+#include <iterator>
+#include <iostream>
+#include <fstream> 
 
 class File{
 
@@ -31,6 +33,7 @@ class File{
 		bool fileDelete();
 		bool fileCreate(std::string filename);
 		std::list<std::string> listDirFiles();
+		std::string find_content();
 
 
 };
