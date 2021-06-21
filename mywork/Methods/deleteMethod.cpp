@@ -1,19 +1,28 @@
 #include "deleteMethod.hpp"
 
-DeleteMethod::DeleteMethod(/* args */)
+DeleteMethod::DeleteMethod()
 {
+}
+
+DeleteMethod::DeleteMethod(DeleteMethod const & copy)
+{
+	(void)copy;
 }
 
 DeleteMethod::~DeleteMethod()
 {
 }
 
-void DeleteMethod::handleDelete(Client client, Request request, Response response)
+DeleteMethod& DeleteMethod::operator=(DeleteMethod const & ope)
 {
-	
+	(void)ope;
+	return(*this);
+}
+
+
+void DeleteMethod::handleDelete(Client &client, Request &request, Response &response)
+{
     (void)client;
-	// (void)response;
-	(void)request;
 	std::cout << "DELETE\n";
 
 	File fileDelete(request.getUrl());
@@ -24,20 +33,9 @@ void DeleteMethod::handleDelete(Client client, Request request, Response respons
 			response.setStatus(200);
 		else
 			response.setStatus(204);
-		
 	}
 	else
 	{
 		response.setStatus(204);
 	}
-	
-	// 	if (fileGet.isFile()) {
-	// 		response.setBody(open(file));
-	// 	} 
-	// 	else if (fileGet.isDirectory()) {
-	// 		response.setBody(listFiles(file));
-	// 	}	
-	// }
-	// else
-	// 	
 }

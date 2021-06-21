@@ -8,15 +8,13 @@
 
 class PostMethod
 {
-private:
-    /* data */
-public:
-    PostMethod(/* args */);
-    // PostMethod(PostMethod const & copy);
-    ~PostMethod();
-    // PostMethod& operator=(PostMethod const & ope);
+	public:
+		PostMethod();
+		PostMethod(PostMethod const & copy);
+		~PostMethod();
+		PostMethod& operator=(PostMethod const & ope);
 
-	void handlePost(Client client, Request request, Response reponse);
+		void handlePost(Client &client, Request &request, Response &response);
 };
 
 #endif

@@ -4,11 +4,22 @@ PostMethod::PostMethod(/* args */)
 {
 }
 
+PostMethod::PostMethod(PostMethod const & copy)
+{
+	(void)copy;
+}
+
 PostMethod::~PostMethod()
 {
 }
 
-void PostMethod::handlePost(Client client, Request request, Response response)
+PostMethod& PostMethod::operator=(PostMethod const & ope)
+{
+	(void)ope;
+	return(*this);
+}
+
+void PostMethod::handlePost(Client &client, Request &request, Response &response)
 {
 	
     (void)client;
@@ -18,7 +29,7 @@ void PostMethod::handlePost(Client client, Request request, Response response)
 
 	if (filePost.isPresent()) {
 		response.setStatus(200);
-		
+		//o create o append	
 	}
 	else {
 		filePost.fileCreate(request.getUrl());

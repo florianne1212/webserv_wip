@@ -8,15 +8,13 @@
 
 class GetMethod
 {
-private:
-    /* data */
-public:
-    GetMethod(/* args */);
-    // GetMethod(GetMethod const & copy);
-    ~GetMethod();
-    // GetMethod& operator=(GetMethod const & ope);
+	public:
+		GetMethod();
+		GetMethod(GetMethod const & copy);
+		~GetMethod();
+		GetMethod& operator=(GetMethod const & ope);
 
-    void handleGet(Client client, Request request, Response reponse);
+		void handleGet(Client &client, Request &request, Response &response);
 };
 
 #endif
