@@ -13,6 +13,7 @@
 #include <iostream>
 #include <fstream> 
 #include "mime.hpp"
+#include <sstream> 
 
 class File{
 
@@ -34,9 +35,11 @@ class File{
 		bool fileDelete();
 		bool fileCreate(std::string filename);
 		size_t fileLength();
+		std::string fileLastModified();
 		std::string find_content_type();
 		std::list<std::string> listDirFiles();
 		std::string find_content();
+		std::string convert_int_to_string(int);
 
 
 };

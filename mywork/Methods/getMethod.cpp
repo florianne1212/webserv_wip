@@ -64,6 +64,6 @@ void GetMethod::setHeader(Response &response, File &fileGet)
 	std::stringstream my_stream;
 	my_stream << fileGet.fileLength();
 	response.setHeaders("Content-Length", my_stream.str());
-
 	
+	response.setHeaders("Last-Modified", fileGet.fileLastModified());
 }

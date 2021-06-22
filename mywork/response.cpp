@@ -50,4 +50,5 @@ void Response::setHeaders(std::string header_name, std::string header_value)
 
 	for (std::map<std::string, std::string>::iterator it=_headers.begin(); it!=_headers.end(); ++it)
     	std::cout << it->first << " => " << it->second << '\n';
+	std::cout << '\n';
 }

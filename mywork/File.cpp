@@ -115,3 +115,35 @@ size_t File::fileLength()
 {
 	return(_stats.st_size);
 }
+
+#include <stdio.h>
+
+std::string File::convert_int_to_string(int nb)
+{
+	std::string str;
+
+	std::stringstream my_stream; 
+	my_stream << nb;  
+	my_stream >> str;
+
+	return(str); 
+}
+
+std::string File::fileLastModified()
+{
+	struct tm *info;
+	info = localtime(&_stats.st_ctime);
+	char my_time [50];
+
+	strftime(my_time, 50,"%a, %d %b %G %T GMT", info);
+
+	std::string str;
+
+	int i = 0;
+	while (my_time[i])
+	{
+		str.push_back(my_time[i]);
+		i++;
+	}
+	return(str);
+}
