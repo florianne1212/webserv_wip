@@ -2,12 +2,14 @@
 #define RESPONSE_HPP
 
 #include <string>
+#include <map>
+#include <iostream>
 
 class Response
 {
 public:
 	int _status;
-	std::string _headers;
+	std::map <std::string, std::string> _headers;
 	std::string _body;
 
 public:
@@ -21,10 +23,7 @@ public:
 
 	void setBody(std::string str);
 	void setStatus(int status);
-
-
-
-	
+	void setHeaders(std::string header_name, std::string header_value);
 };
 
 

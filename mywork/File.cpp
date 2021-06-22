@@ -83,6 +83,21 @@ std::list<std::string> File::listDirFiles()
 	return(files_list);
 }
 
+std::string File::find_content_type()
+{
+
+	std::string ext;
+	std::size_t found = _path.find(".");
+	std::string mime;
+	Mime my_mime;
+	
+	if (found!=std::string::npos)
+		ext=_path.substr(found+1);
+
+	mime = my_mime.find_mime(ext);
+	return(mime);
+}
+
 std::string File::find_content()
 {
 	// int fd;
@@ -94,4 +109,9 @@ std::string File::find_content()
 
 	return(content);
 	
+}
+
+size_t File::fileLength()
+{
+	return(_stats.st_size);
 }

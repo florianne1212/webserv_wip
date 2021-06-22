@@ -25,7 +25,7 @@ int			main()
 	ParseHeaderFields _parseheader;
 	Request _request;
 	const char *req = ""
-		"DELETE /mydir.txt HTTP/1.1\r\n"
+		"GET /index.html HTTP/1.1\r\n"
 		"Host: localhost:8080\r\n"
 		"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
 		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
@@ -65,8 +65,6 @@ int			main()
 	MiddlewareChain chain(middlewares, client, request, response);
 	chain();
 
-	Mime my_mime;
-	std::cout << my_mime.find_mime("mp4");
 	
 
 	// for (std::map<std::string, std::string>::iterator it=reqmap.begin(); it!=reqmap.end(); ++it)

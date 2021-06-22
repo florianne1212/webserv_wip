@@ -32,9 +32,9 @@ void GetMethod::handleGet(Client &client, Request &request, Response &response)
 	if (fileGet.isPresent()) {
 		if (fileGet.isFile()) {
 			std::cout << "it's a file\n";
-			std::string file_content(fileGet.find_content());
-			std::cout << "my content  = \n" << file_content << "\n";
-			response.setBody(file_content);
+			setHeader(response, fileGet);
+
+
 			// response.setContent
 		} 
 		else if (fileGet.isDirectory()) {
@@ -50,4 +50,20 @@ void GetMethod::handleGet(Client &client, Request &request, Response &response)
 		std::cout << "404 not found\n";
 		response.setStatus(404);
 	}
+}
+
+void GetMethod::setHeader(Response &response, File &fileGet)
+{
+	std::string file_content(fileGet.find_content());
+	response.setBody(file_content);
+
+	std::string content_type = fileGet.find_content_type();
+	if(!content_type.empty())
+		response.setHeaders("Content-Type", fileGet.find_content_type());
+
+	std::stringstream my_stream;
+	my_stream << fileGet.fileLength();
+	response.setHeaders("Content-Length", my_stream.str());
+
+	
 }

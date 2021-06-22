@@ -5,6 +5,7 @@
 #include "../Client.hpp"
 #include "../File.hpp"
 #include <iostream>
+#include <sstream> 
 
 class GetMethod
 {
@@ -15,6 +16,7 @@ class GetMethod
 		GetMethod& operator=(GetMethod const & ope);
 
 		void handleGet(Client &client, Request &request, Response &response);
+		void setHeader(Response &response, File &fileGet);
 };
 
 #endif
