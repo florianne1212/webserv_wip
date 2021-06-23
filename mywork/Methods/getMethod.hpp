@@ -6,6 +6,7 @@
 #include "../File.hpp"
 #include <iostream>
 #include <sstream> 
+#include <sys/stat.h>
 
 class GetMethod
 {
@@ -17,6 +18,7 @@ class GetMethod
 
 		void handleGet(Client &client, Request &request, Response &response);
 		void setHeader(Response &response, File &fileGet);
+		std::string setDirectory(File &fileGet, std::string url);
 };
 
 #endif

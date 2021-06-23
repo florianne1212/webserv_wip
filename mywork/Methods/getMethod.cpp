@@ -38,11 +38,7 @@ void GetMethod::handleGet(Client &client, Request &request, Response &response)
 			// response.setContent
 		} 
 		else if (fileGet.isDirectory()) {
-			std::list<std::string> files_list = fileGet.listDirFiles();
-
-			for (std::list<std::string>::iterator it=files_list.begin(); it != files_list.end(); ++it)
-   				std::cout << "file =" << *it << '\n';
-			// response.setBody(listFiles(file));
+			setDirectory(fileGet, request.getUrl());
 		}	
 	}
 	else
@@ -50,6 +46,35 @@ void GetMethod::handleGet(Client &client, Request &request, Response &response)
 		std::cout << "404 not found\n";
 		response.setStatus(404);
 	}
+}
+
+std::string GetMethod::setDirectory(File &fileGet, std::string url)
+{
+	std::string response_body =
+		"<html>\n"
+		" <head>\n"
+		"  <title>file of" + url + "</title>\n"
+		" </head>\n"
+		" <body>\n";
+	std::list<std::string> files_list = fileGet.listDirFiles();
+
+	std::string file_list;
+	for (std::list<std::string>::iterator it=files_list.begin(); it != files_list.end(); ++it)
+	{
+		std::string newurl = "" + url + "/" + *it + "";
+		File fileTest(newurl);
+		if (fileTest.isPresent()) {
+			if (fileTest.isFile())
+				file_list = "  <a href=\"/" + url + "/" + *it + "\">"  + *it + "</a> <br/>\n";
+			else if (fileTest.isDirectory())
+				file_list = "  <a href=\"/" + url + "/" + *it + "\">"  + *it + "/ </a> <br/>\n";
+		} 
+		response_body += file_list;
+	}
+	response_body += "</body></html>";
+	std::cout << response_body;
+			// response.setBody(listFiles(file));
+	return(response_body);
 }
 
 void GetMethod::setHeader(Response &response, File &fileGet)

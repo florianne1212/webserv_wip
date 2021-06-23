@@ -40,6 +40,7 @@ class File{
 		std::list<std::string> listDirFiles();
 		std::string find_content();
 		std::string convert_int_to_string(int);
+		struct stat getStat();
 
 
 };

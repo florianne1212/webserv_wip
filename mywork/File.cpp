@@ -147,3 +147,8 @@ std::string File::fileLastModified()
 	}
 	return(str);
 }
+
+struct stat File::getStat()
+{
+	return(_stats);
+}
