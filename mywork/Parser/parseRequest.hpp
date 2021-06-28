@@ -3,6 +3,7 @@
 
 #include <string>
 #include "parseHeaderFields.hpp"
+#include "parseBody.hpp"
 #include "stdio.h"
 #include "Message.hpp"
 
@@ -28,7 +29,7 @@ class ParseRequest
 			S_HTTP_END_R,
 			S_HTTP_END_N,
 			S_HEADER_FIELDS,
-			// S_BODY,
+			S_BODY,
 			// S_BODY_DECODE,
 			// S_END_R,
 			S_END,
@@ -36,10 +37,12 @@ class ParseRequest
 	private:
 		std::string _method;
 		std::string _path;
+		std::string _body;
 		int _major;
 		int _minor;
 		State _state;
 		ParseHeaderFields _parseHeaderFields;
+		ParseBody _parseBody;
 
 
 

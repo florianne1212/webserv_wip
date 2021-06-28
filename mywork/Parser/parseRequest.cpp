@@ -183,6 +183,15 @@ void ParseRequest::parse(char c)
 			_parseHeaderFields.parse(c);
 			if(_parseHeaderFields.get_state() == ParseHeaderFields::S_END)
 			{
+				_state = S_BODY;
+			}
+		}
+
+		case(S_BODY):
+		{
+			_parseBody.parse(c, _parseHeaderFields.get_headers_map());
+			if(_parseBody.get_state() == ParseBody::S_END)
+			{
 				_state = S_END;
 			}
 		}
