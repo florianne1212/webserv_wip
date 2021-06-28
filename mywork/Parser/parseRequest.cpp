@@ -189,6 +189,7 @@ void ParseRequest::parse(char c)
 
 		case(S_BODY):
 		{
+			std::cout << "POUET";
 			_parseBody.parse(c, _parseHeaderFields.get_headers_map());
 			if(_parseBody.get_state() == ParseBody::S_END)
 			{

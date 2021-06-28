@@ -1,6 +1,6 @@
 
-#include "Parser/parseRequest.cpp"
-#include "Parser/parseHeaderFields.cpp"
+#include "Parser/parseRequest.hpp"
+// #include "Parser/parseHeaderFields.cpp"
 #include "request.hpp"
 #include "response.hpp"
 #include "Client.hpp"
@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 #include <fcntl.h>
-#include <stdio.h>
+// #include <stdio.h>
 #include <iostream>
 #include <fstream>
 #include <list>
@@ -30,7 +30,10 @@ int			main()
 		"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
 		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
 		"Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3\r\n"
-		"Accept-Encoding: gzip, deflate\r\n\r\n";
+		"Accept-Encoding: gzip, deflate\r\n"
+		"Content-Length: 100\r\n"
+		"pouet pouet \r\n\r\n";
+
 
 	std::string line = req;
 
