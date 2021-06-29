@@ -15,8 +15,9 @@ public:
 		S_END,
 	};
 private:
-	std::string _Body;
+	std::string _body;
 	State _state;
+	int _count;
 public:
     ParseBody();
 	ParseBody(std::string ParseBody);
@@ -27,10 +28,10 @@ public:
 public:
 	void parse(char c, std::map<std::string, std::string> _headers);
 	void parse_chunked(char c);
-	void parse_identity(char c);
+	void parse_identity(char c, std::map<std::string, std::string> _headers);
 	std::string get_Body()
 	{
-		return(_Body);
+		return(_body);
 	}
 	State get_state()
 	{

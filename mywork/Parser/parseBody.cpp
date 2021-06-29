@@ -1,12 +1,14 @@
 #include "parseBody.hpp"
 
 
-ParseBody::ParseBody()
+ParseBody::ParseBody():
+_count(0)
 {
 }
 
 ParseBody::ParseBody(std::string Body):
-_Body(Body)
+_body(Body),
+_count(0)
 {
 }
 
@@ -23,8 +25,9 @@ ParseBody& ParseBody::operator=(ParseBody const & ope)
 {
 	if (this != &ope)
     {
-        this->_Body = ope._Body;
+        this->_body = ope._body;
         this->_state = ope._state;
+		this->_count = ope._count;
     }
     return (*this);
     
@@ -33,23 +36,25 @@ ParseBody& ParseBody::operator=(ParseBody const & ope)
 void ParseBody::parse_chunked(char c)
 {
 	std::cout << "\n TUU \n";
-	if (_Body.find("\r\n") == std::string::npos)
+	if (_body.find("\r\n") == std::string::npos)
 	{
-		_Body.push_back(c); 
+		_body.push_back(c); 
 	}
 	else
 		_state = S_END;
 }
 
-void ParseBody::parse_identity(char c)
+void ParseBody::parse_identity(char c, std::map<std::string, std::string> _headers)
 {
-	if (_Body.find("\r\n") == std::string::npos)
+	// std::cout << "nb :" << atoi(_headers.find("Content-Length")->second.c_str()) << " nb2 =" << _count;
+	if (_count < atoi(_headers.find("Content-Length")->second.c_str()))
 	{
-		_Body.push_back(c);
+		_body.push_back(c);
+		_count++;
 	}
 	else
 	{
-		std::cout << "\nBody = " << _Body; 
+		std::cout << "\nBody = " << _body; 
 		_state = S_END;
 	}
 }
@@ -59,9 +64,9 @@ void ParseBody::parse(char c, std::map<std::string, std::string> _headers)
 	if(_headers.find("Transfer-Encoding") != _headers.end() && _headers.find("Transfer-Encoding")->second == "chunked")
 		parse_chunked(c);
 	else if(_headers.find("Transfer-Encoding") != _headers.end() && _headers.find("Transfer-Encoding")->second == "identity")
-		parse_identity(c);
+		parse_identity(c, _headers);
 	else if(_headers.find("Content-Length") != _headers.end()) 
-		parse_identity(c);
+		parse_identity(c, _headers);
 	else
 		_state = S_END;
 	// std::cout << _headers.find("Content-Length")->first;
