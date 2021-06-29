@@ -31,7 +31,7 @@ int			main()
 		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
 		"Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3\r\n"
 		"Accept-Encoding: gzip, deflate\r\n"
-		"Content-Length: 100\r\n"
+		"Content-Length: 100\r\n\n"
 		"pouet pouet \r\n\r\n";
 
 
@@ -70,8 +70,8 @@ int			main()
 
 	
 
-	// for (std::map<std::string, std::string>::iterator it=reqmap.begin(); it!=reqmap.end(); ++it)
-    	// std::cout << it->first << " => " << it->second << '\n';
+	for (std::map<std::string, std::string>::iterator it=reqmap.begin(); it!=reqmap.end(); ++it)
+    	std::cout << it->first << " => " << it->second << '\n';
 
 	
 }

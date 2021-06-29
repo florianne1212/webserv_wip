@@ -151,6 +151,7 @@ void ParseRequest::parse(char c)
 				_state = S_HTTP_END_N;
 			else
 				printf("%s\n", "there is suposed to be n or r");
+			break;
 		}
 
 		case(S_HTTP_END_R):
@@ -183,18 +184,20 @@ void ParseRequest::parse(char c)
 			_parseHeaderFields.parse(c);
 			if(_parseHeaderFields.get_state() == ParseHeaderFields::S_END)
 			{
+				std::cout << "POUI";
 				_state = S_BODY;
 			}
+			break;
 		}
 
 		case(S_BODY):
 		{
-			std::cout << "POUET";
 			_parseBody.parse(c, _parseHeaderFields.get_headers_map());
 			if(_parseBody.get_state() == ParseBody::S_END)
 			{
 				_state = S_END;
 			}
+			break;
 		}
 		
 		case(S_END):

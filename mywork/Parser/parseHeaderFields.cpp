@@ -37,9 +37,9 @@ void ParseHeaderFields::parse(char c)
 			if(c == ' ')
 			{
 				if(_field.empty())
-					throw ("there is some space before field");
+					printf("%s\n","there is some space before field");
 				else
-					throw ("there is some space before fields");
+					printf("%s\n","there is some space before fields");
 				   
 			}
 			else if(c == ':')
