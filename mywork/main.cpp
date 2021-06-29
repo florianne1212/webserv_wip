@@ -15,7 +15,10 @@
 #include <list>
 #include "middleware/IMiddleware.hpp"
 #include "middleware/MiddlewareChain.hpp"
-#include "middleware/MethodMiddleware.hpp"
+#include "middleware/method/MethodMiddleware.hpp"
+#include "middleware/before/checkRedir.hpp"
+#include "middleware/before/isConnected.hpp"
+#include "middleware/before/checkRequest.hpp"
 
 int			main()
 {
@@ -66,6 +69,9 @@ int			main()
 
 	std::list<IMiddleware *> middlewares;
 	middlewares.push_back(new MethodMiddleware());
+	middlewares.push_back(new CheckRedir());
+	middlewares.push_back(new CheckRequest());
+	middlewares.push_back(new IsConnected());
 
 	MiddlewareChain chain(middlewares, client, request, response);
 	chain();
