@@ -39,6 +39,7 @@ void ParseBody::parse_chunked(char c)
 	if(_parseChunkedBody.get_state() == ParseChunkedBody::S_END)
 	{
 		_body = _parseChunkedBody.get_Body();
+		std::cout << "_FINAL BODY " << _body;
 		_state = S_END;
 	}
 }

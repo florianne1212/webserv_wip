@@ -28,15 +28,21 @@ int			main()
 	ParseHeaderFields _parseheader;
 	Request _request;
 	const char *req = ""
-		"POST /test.txt HTTP/1.1\r\n"
+		"POST /testu.txt HTTP/1.1\r\n"
 		"Host: localhost:8080\r\n"
 		"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
 		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
 		"Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3\r\n"
 		"Accept-Encoding: gzip, deflate\r\n"
-		"Content-Length: 10\r\n"
+		"Transfer-Encoding: chunked\r\n"
 		"\r\n"
-		"pouet pouet \r\n"
+		"7\r\n"
+		"Mozilla\r\n"
+		"9\r\n"
+		"Developer\r\n"
+		"7\r\n"
+		"Network\r\n"
+		"0\r\n"
 		"\r\n";
 
 
@@ -50,6 +56,8 @@ int			main()
 	}   
 	_request.setMethods(_parserequest.get_method());
 	_request.setUrl(_parserequest.get_path());
+	_request.setBody(_parserequest.get_body());
+
 	_parseheader = _parserequest.get_parserfields();
 	std::map<std::string, std::string>  mymap = _parseheader.get_headers_map();
 	_request.setHeaders(mymap);
@@ -78,8 +86,8 @@ int			main()
 
 	
 
-	for (std::map<std::string, std::string>::iterator it=reqmap.begin(); it!=reqmap.end(); ++it)
-    	std::cout << it->first << " => " << it->second << '\n';
+	// for (std::map<std::string, std::string>::iterator it=reqmap.begin(); it!=reqmap.end(); ++it)
+    // 	std::cout << it->first << " => " << it->second << '\n';
 
 	
 }

@@ -3,14 +3,14 @@
 
 ParseChunkedBody::ParseChunkedBody():
 _state(S_LENGTH),
-_count(0)
+_count(1)
 {
 }
 
 ParseChunkedBody::ParseChunkedBody(std::string Body):
 _body(Body),
 _state(S_LENGTH),
-_count(0)
+_count(1)
 {
 }
 
@@ -52,17 +52,24 @@ void ParseChunkedBody::parse(char c)
 			break;
 		}
 		case(S_PARSE_BODY):
-		{
-			if(_count < atoi(_nb.c_str()))
-				_body.push_back(c);
-			else
+		{ 
+			if(_count < (atoi(_nb.c_str())))
 			{
+				_body.push_back(c);
+				_count++;
+				
+			}
+			else if(_count == (atoi(_nb.c_str())))
+				_count++;
+			if(_count == (atoi(_nb.c_str()) + 1))
+			{
+				_nb.clear();
+				_count = 1;
 				if(c != '\r')
-					printf("%s\n","there is supposed to be a '\\r");
+					printf("%s %c\n","there is supposed to be a '\\r", c);
 				else
 					_state = S_END_R;
 			}
-			
 			break;
 		}
 		case(S_END_R):
@@ -81,15 +88,23 @@ void ParseChunkedBody::parse(char c)
 			else if(isdigit(c) && _nb.empty())
 			{
 				_nb.push_back(c);
+				if (atoi(_nb.c_str()) == 0)
+					_state = S_END;
 				_state = S_LENGTH;
 			}
 			else if(isdigit(c))
 			{
-				_nb.push_back(c);
+				_body.push_back(c);
+				_state = S_PARSE_BODY;
+			}
+			else if (!_nb.empty())
+			{
+				_body.push_back(c);
 				_state = S_PARSE_BODY;
 			}
 			else
-				printf("%s\n","there is supposed to be a '\\r or a digit");
+				printf("%s %c\n","there is supposed to be something else '\\n", c);
+			
 			
 			break;
 		}
@@ -104,6 +119,7 @@ void ParseChunkedBody::parse(char c)
 		}
 		case(S_END):
 		{
+			
 			break;
 		}
 	}
